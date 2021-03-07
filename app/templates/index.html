@@ -1,27 +1,21 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
+{%from 'display_quote_macro.html' import display_quotes%}
+{% from 'display_post_macro.html' import display_posts%}
+{%block content%}
+ <h1>{{display_quotes(quotes)}}</h1>
+{% for post in posts %}
 
-{% block content %}
-<div class="container-fluid">
-    <div class="col-md-3"></div>
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    {{ message }}
+<article class="media content-section">
+    <img class="rounded-circle article-img"
+         src="{{ url_for('static', filename='profile_pic/' + post.author.image_file) }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ post.author.username }}</a>
+            <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+        </div>
+        <h2><a class="article-title" href="{{ url_for('main.mypost', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <p class="article-content">{{ post.content }}</p>
     </div>
-    {% endfor %}
-    <form class="form-inline ml-2" action="{{url_for('main.subscribe')}}" method="POST">
-        <div class="md-form form-group">
-            <label class="white-color" style="color: white;">Name</label>
-            <input type="name" style="color: black;" class="form-control " name ="subscriber" required>
-            <label class="white-color" style="color: white;">Email Address...</label>
-            <input type="email" style="color: black;" class="form-control " name ="subscriber" required>
-        </div>
-
-        <div class="md-form form-group">
-            <button class="btn btn-sm btn-outline-info" id="subs" style="color: black; margin: 10px;">Subscribe</button>
-        </div>
-    </form>
-</div>
-</div>
-</div>
-{% endblock content %}
+</article>
+{% endfor %}
+{%endblock%}
