@@ -1,0 +1,40 @@
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <div class="container">
+        <a class="navbar-brand mr-4" href="/">Flask Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link" href="/">Home</a>
+
+              {% if current_user.is_authenticated %}
+        <li><a href="">{{ current_user.name }}</a></li>
+        <li><a href="/authenticate/logout">logout</a></li>
+      {% else %}
+        <li><a href="/authenticate/login">login</a></li>
+        <li><a href="/authenticate/register">register</a></li>
+      {% endif %}
+          </div>
+          <!-- Navbar Right Side -->
+          <div class="navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+                {% else %}
+                <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+              
+              
+                {%endif%}
+              </ul>
+              
+
+
+            <!-- <a class="nav-item nav-link" href="#">Login</a>
+            <a class="nav-item nav-link" href="#">Register</a> -->
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
