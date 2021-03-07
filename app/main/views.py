@@ -96,30 +96,30 @@ def update_post(post_id):
                            form=form, legend='Update Post')
 
 
-@main.route("/post/<int:post_id>/delete", methods=['POST'])
-@login_required
-def delete_post(post_id):
-    post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
-        abort(403)
-    post.delete()
-    flash('Your post has been deleted!', 'success')
-    return redirect(url_for('main.index'))
+# @main.route("/post/<int:post_id>/delete", methods=['POST'])
+# @login_required
+# def delete_post(post_id):
+#     post = Post.query.get_or_404(post_id)
+#     if post.author != current_user:
+#         abort(403)
+#     post.delete()
+#     flash('Your post has been deleted!', 'success')
+#     return redirect(url_for('main.index'))
 
 
-@main.route('/like/<int:id>', methods=['POST', 'GET'])
-@login_required
-def upvote(id):
-    post = Post.query.get(id)
-    clap = Clap(post=post, upvote=1)
-    clap.save()
-    return redirect(url_for('main.myposts'))
+# @main.route('/like/<int:id>', methods=['POST', 'GET'])
+# @login_required
+# def upvote(id):
+#     post = Post.query.get(id)
+#     clap = Clap(post=post, upvote=1)
+#     clap.save()
+#     return redirect(url_for('main.myposts'))
 
 
-@main.route('/comment/<post_id>', methods=['Post', 'GET'])
-@login_required
-def comment(post_id):
-    comment = request.form.get('newcomment')
-    new_comment = Comment(comment=comment, user_id=current_user._get_current_object().id, post_id=post_id)
-    new_comment.save()
-    return redirect(url_for('main.mypost', post_id=post_id))
+# @main.route('/comment/<post_id>', methods=['Post', 'GET'])
+# @login_required
+# def comment(post_id):
+#     comment = request.form.get('newcomment')
+#     new_comment = Comment(comment=comment, user_id=current_user._get_current_object().id, post_id=post_id)
+#     new_comment.save()
+#     return redirect(url_for('main.mypost', post_id=post_id))
