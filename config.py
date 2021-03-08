@@ -6,20 +6,14 @@ ld()
 
 
 class Config:
-    # csrf = CSRFProtect(app)
 
 
     SECRET_KEY = os.urandom(32)
-    # app.config['SECRET_KEY'] = SECRET_KEY
 
-    # app.config['SECRET_KEY'] = SECRET_KEY
 
     debug = True
-    # SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://jack:jack@localhost/blog'
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
-    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SECRET_KEY = os.environ.get('SECRET_KEY')
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
@@ -31,3 +25,13 @@ class Config:
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
+
+
+class ProdConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+class DevConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    DEBUG = True
+config_options = {
+'development':DevConfig,
+'production':ProdConfig
