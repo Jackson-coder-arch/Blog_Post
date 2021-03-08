@@ -54,7 +54,12 @@ ld()
 
 
 class Config:
-    SECREAT_KEY ='12345'
+    # csrf = CSRFProtect(app)
+
+
+    SECRET_KEY = os.urandom(32)
+    # app.config['SECRET_KEY'] = SECRET_KEY
+
     # app.config['SECRET_KEY'] = SECRET_KEY
 
     debug = True

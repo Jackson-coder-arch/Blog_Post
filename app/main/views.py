@@ -36,7 +36,7 @@ def save_picture(form_picture):
 
 
 @main.route('/profile', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def profile():
     form = UpdateAccountForm()
     if form.validate_on_submit():
@@ -56,7 +56,7 @@ def profile():
 
 
 @main.route("/new_post", methods=['GET', 'POST'])
-@login_required
+# @login_required
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
@@ -68,7 +68,7 @@ def new_post():
 
 
 @main.route("/post/<int:post_id>")
-@login_required
+# @login_required
 def mypost(post_id):
     comments = Comment.query.filter_by(post_id=post_id).all()
     print(comments)
@@ -78,7 +78,7 @@ def mypost(post_id):
 
 
 @main.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
-@login_required
+# @login_required
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:
@@ -98,7 +98,7 @@ def update_post(post_id):
 
 
 @main.route("/post/<int:post_id>/delete", methods=['POST'])
-@login_required
+# @login_required
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:
@@ -109,7 +109,7 @@ def delete_post(post_id):
 
 
 @main.route('/like/<int:id>', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def upvote(id):
     post = Post.query.get(id)
     clap = Clap(post=post, upvote=1)
@@ -118,7 +118,7 @@ def upvote(id):
 
 
 @main.route('/comment/<post_id>', methods=['Post', 'GET'])
-@login_required
+# @login_required
 def comment(post_id):
     comment = request.form.get('newcomment')
     new_comment = Comment(comment=comment, user_id=current_user._get_current_object().id, post_id=post_id)
