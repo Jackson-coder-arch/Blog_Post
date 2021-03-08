@@ -1,8 +1,10 @@
 import os
 import secrets
+
 from PIL import Image
 from flask import render_template, url_for, redirect, request, flash, abort
 from flask_login import current_user, login_required
+
 from app import app
 from app import db
 from app.main import main
@@ -62,8 +64,7 @@ def new_post():
         post.save()
         flash('Your post has been created!', 'success')
         return redirect(url_for('main.index'))
-    return render_template('new_post.html', title='New Post',
-                           form=form, legend='New Post')
+    return render_template('new_post.html', title='New Post', form=form, legend='New Post')
 
 
 @main.route("/post/<int:post_id>")
