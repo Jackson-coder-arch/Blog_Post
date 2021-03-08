@@ -10,7 +10,7 @@ from app import db
 from app.main import main
 from app.main.forms import UpdateAccountForm, PostForm
 from app.models import Post, Clap, Comment
-from app.requests import getQuotes
+from ..requests import getQuotes
 
 
 @main.route('/')
